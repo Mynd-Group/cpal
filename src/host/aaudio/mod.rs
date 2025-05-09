@@ -215,6 +215,7 @@ fn configure_for_device(
         builder
     };
     builder = builder.sample_rate(config.sample_rate.0.try_into().unwrap());
+    builder = builder.performance_mode(ndk::audio::AudioPerformanceMode::PowerSaving);
     match &config.buffer_size {
         BufferSize::Default => builder,
         BufferSize::Fixed(size) => builder.buffer_capacity_in_frames(*size as i32),
