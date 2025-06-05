@@ -287,6 +287,7 @@ where
                     playback: stream_instant(stream),
                 },
             };
+
             (data_callback)(
                 &mut unsafe {
                     Data::from_parts(
@@ -302,6 +303,7 @@ where
         .error_callback(Box::new(move |stream, error| {
             (error_callback)(StreamError::from(error))
         }))
+        .performance_mode(ndk::audio::AudioPerformanceMode::PowerSaving)
         .open_stream()?;
     Ok(Stream::Output(stream))
 }
